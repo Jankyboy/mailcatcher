@@ -28,6 +28,23 @@ MailCatcher runs a super simple SMTP server which catches any message sent to it
 
 Use `mailcatcher --help` to see the command line options. The brave can get the source from [the GitHub repository][mailcatcher-github].
 
+### Ruby
+
+If you have trouble with the above commands, make sure you have [Ruby installed](https://www.ruby-lang.org/en/documentation/installation/):
+
+```
+ruby -v
+gem environment
+```
+
+You might need to install build tools for some of the gem dependencies. On Debian or Ubuntu, `apt install build-essential`. On macOS, `xcode-select --install`.
+
+If you encounter issues installing [thin](https://rubygems.org/gems/thin), try:
+
+```
+gem install thin -v 1.5.1 -- --with-cflags="-Wno-error=implicit-function-declaration"
+```
+
 ### Bundler
 
 Please don't put mailcatcher into your Gemfile. It will conflict with your applications gems at some point.
@@ -86,12 +103,6 @@ A fairly RESTful URL schema means you can download a list of messages in JSON fr
 
 * Mail processing is fairly basic but easily modified. If something doesn't work for you, fork and fix it or [file an issue][mailcatcher-issues] and let me know. Include the whole message you're having problems with.
 * Encodings are difficult. MailCatcher does not completely support utf-8 straight over the wire, you must use a mail library which encodes things properly based on SMTP server capabilities.
-
-## TODO
-
-* Add mail delivery on request, optionally multiple times.
-* Compatibility testing against CampaignMonitor's [design guidelines](http://www.campaignmonitor.com/design-guidelines/) and [CSS support matrix](http://www.campaignmonitor.com/css/).
-* Forward mail to rendering service, maybe CampaignMonitor?
 
 ## Thanks
 
